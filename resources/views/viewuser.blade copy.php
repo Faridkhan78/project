@@ -38,49 +38,46 @@
         </div>
     </div>
     <div class="container">
-        <div class="row mt-4">
+        <div class="row">
             {{-- search --}}
-            <form action="" class="col-5" method="">
+            <form action="{{ route('search') }}" class="col-5" method="GET">
                 <div class="form-group">
-                    <label for=""><b>Search</b></label>
-                    <input type="search" name="search" class="form-control" id="search"
-                        placeholder="search by name or email" />
+                    <label for="">search</label>
+                    <input type="search" name="search" class="form-control" placeholder="search by name or email" />
                 </div>
-                {{-- <button class="btn btn-primary">Search</button> --}}
+                <button class="btn btn-primary">Search</button>
             </form>
 
             {{-- end search --}}
 
             {{-- start date --}}
-            <div class="container mt-4">
-                <form action="{{route('fetchdata')}}" method="GET">
-                    <div class="col-md-12 d-flex">
-                        <div class="col-md-4">
-                            <label for="start_date" class="form-label"><b>Start Date</b></label>
-                            <input type="date" class="form-control" id="start_date" name="start_date"
-                                placeholder="Select Start Date">
-                        </div>
-                         &nbsp;&nbsp;&nbsp;
-                        <!-- End Date -->
-                        <div class="col-md-4">
-                            <label for="end_date" class="form-label"><b>End Date</b></label>
-                            <input type="date" class="form-control" id="end_date" name="end_date"
-                                placeholder="Select End Date">
-                        </div>
-                        <div class="btn">
-                            <button type="submit" class="btn  btn-primary">Filter</button>
-                        </div>
+            <form action="GET" method="/filter">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <label for="start_date" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="start_date" name="start_date"
+                            placeholder="Select Start Date">
                     </div>
-                </form>
-            </div>
+
+                    <!-- End Date -->
+                    <div class="col-md-4">
+                        <label for="end_date" class="form-label">End Date</label>
+                        <input type="date" class="form-control" id="end_date" name="end_date"
+                            placeholder="Select End Date">
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                    </div>
+                </div>
+            </form>
 
             {{-- end date --}}
 
 
             <div class="col-6 mt-4">
-                {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Add New Record
-                </button> --}}
+                </button>
                 {{-- <h1>All user List</h1> --}}
                 <a href="/" class="btn btn-success btn-sm mb-3">+Add Record</a>
 
@@ -100,7 +97,6 @@
                         {{-- <th>DELETE</th>
                         <th>UPDATE</th> --}}
                     </tr>
-                    <tbody class="alldata">
                     @foreach ($user as $userItem)
                         <tr>
                             <td>{{ $userItem->id }}</td>
@@ -122,41 +118,23 @@
 
                         </tr>
                     @endforeach
-                </tbody>
-                    <tbody id="tbody" class="searchdata"></tbody>
                 </table>
 
             </div>
         </div>
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-    crossorigin="anonymous"></script>
-
-    <script>
-        $('#search').on('keyup', function(){
-           $value= $(this).val();
-            if($value){
-                $('.alldata').hide();
-                $('.searchdata').show();
-            }else{
-                $('.alldata').show();
-                $('.searchdata').hide();
-            }
-
-           $.ajax({
-            type:'get',
-            url:"{{ route('search')}}",
-            data:{
-                'search':$value
-            },
-            success:function(data){
-                console.log(data);
-                $('#tbody').html(data);
-                
-            }
-           })
-        });
-    </script>
 
 </html>
+
+
+
+
+{{-- @foreach ($data as $id => $user)
+    <h3>
+        {{$user->name}}|
+        {{$user->email}}|
+        {{$user->age}}|
+        {{$user->city}}|
+    </h3>
+@endforeach --}}

@@ -30,6 +30,11 @@
                                 <input type="email" class="form-control" id="useremail" name="email" value="{{$user->email}}">
                             </div>
 
+                            <div class="mb-3 mt-3">
+                                <label for="usernumber" class="form-label"><b>Mobile Number:</b></label>
+                                <input type="text" class="form-control" id="usernumber" name="phone_number" value="{{$user->phone_number}}">
+                            </div>
+
 
                             <button type="submit" class="btn btn-primary">Update</button>
                             <a href="/" class="btn btn-secondary">Back</a>

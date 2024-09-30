@@ -18,16 +18,25 @@
                         <h3>Adduser</h3>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('registerSave')}}" method="POST">
+                        <form action="{{ route('registerSave') }}" method="POST">
                             @csrf
                             <div class="mb-3 mt-3">
                                 <label for="username" class="form-label"><b>Name:</b></label>
                                 <input type="text" class="form-control" id="username" name="name">
+                                <span style="color: red">@error('name'){{$message}}  @enderror</span>                                 
+                               
                             </div>
 
                             <div class="mb-3 mt-3">
                                 <label for="useremail" class="form-label"><b>Email Address:</b></label>
                                 <input type="email" class="form-control" id="useremail" name="email">
+                                <span style="color: red">@error('email'){{$message}}  @enderror</span>
+                            </div>
+
+                            <div class="mb-3 mt-3">
+                                <label for="number" class="form-label"><b>Mobile Number:</b></label>
+                                <input type="text" class="form-control" id="usernumber" name="phone_number">
+                                <span style="color: red">@error('phone_number'){{$message}}  @enderror</span>
                             </div>
 
 
@@ -36,17 +45,19 @@
                         </form>
                     </div>
 
-                     @if ($errors->any())
+                    {{-- @if ($errors->any())
                         <div class="card-footer text-body-secondary">
                             <div class="alert alert-danger">
                                 @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
+                                    <div style="color:red">
+                                        <li>{{ $error }}</li>
+                                    </div>
                                 @endforeach
                             </div>
 
                         </div>
 
-                    @endif 
+                    @endif --}}
 
 
                 </div>
